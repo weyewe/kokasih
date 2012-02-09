@@ -1,0 +1,2 @@
+module MasterData::VillagesHelper
+end

@@ -1,0 +1,2 @@
+module MasterData::CommunesHelper
+end

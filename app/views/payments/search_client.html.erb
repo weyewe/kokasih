@@ -1,0 +1,57 @@
+
+<div class="span9 content">
+  <%= render :partial => "layouts/guide/new_payment" %>
+
+  
+
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <%= render :partial => "payments/breadcrumb", :locals => {:client => nil, :loan => nil} %>
+      
+      <div class="row-fluid">
+        
+        <div class="span3">
+          <p>
+            Ask your client for their account number. 
+          </p>
+          <p>
+            They must have been registered in order to create loan. If they don't have one,
+            ask them to see the LoanCreator.
+          </p>
+          
+          
+        </div>
+        
+        <div class="span9">
+          
+          <% if not  flash[:error].nil? %>
+            <div class="alert alert-error">
+              <a class="close">×</a>
+              <strong>Ah snaaps :(.</strong> No client with that account number. 
+            </div>
+          <% end %>
+          
+          <%= form_tag execute_search_client_url,:class => "well form-search", :method => :post do  %>
+          
+            <%= text_field_tag  "search", nil,
+                  :placeholder=>"enter account no", :class=>"input-medium search-query" %>
+            <%= hidden_field_tag 'destination',  "#{ROLE_SYMBOL[:debt_collector]}" %>
+            <!-- <input type="text" class="input-medium search-query" placeholder="enter client ID"> -->
+            <button class="btn" type="submit">Search Client</button>
+          <% end %>
+
+          
+          
+        </div>
+        
+      </div>
+      
+    
+    </div><!--/span-->
+
+    
+    
+  </div><!--/row-->
+
+</div><!--/span-->

@@ -1,0 +1,2 @@
+module MasterData::ProvincesHelper
+end

@@ -1,0 +1,71 @@
+
+<div class="span9 content">
+  <%= render :partial => "layouts/guide/new_client" %>
+
+  
+
+  
+  <div class="row-fluid">
+    <div class="span12">
+      
+      <div class="row-fluid">
+        
+    
+        
+        <div class="span12">
+          
+          <% if not  flash[:error].nil? %>
+            <div class="alert alert-error">
+              <a class="close">×</a>
+              <strong>Ah snaaps :(.</strong> There is similar email or Account No in our system. 
+              Make sure that those two are unique. 
+            </div>
+          <% end %>
+
+          <% if not  flash[:notice].nil? %>
+            <div class="alert alert-success">
+              <a class="close">×</a>
+              <strong>Yes!! :).</strong> A new client with Account No <b><%= params[:username]%></b> is created. 
+            </div>
+          <% end %>
+
+          <%= form_for Client.new , :url => create_new_client_url ,
+                :html => {:class => "form-horizontal"} do |f| %>
+
+            <div class="control-group">
+              <%= f.label :email, "Email" %>
+              <div class="controls">
+                <%= f.email_field :email, :class=>"input-xlarge"  %>
+                <p class="help-block">Enter the client email</p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :username, "Account No" %>
+              <div class="controls">
+                <%= f.text_field :username, :class=>"input-xlarge" %>
+                <p class="help-block">Enter the client's account number. It has to be unique.</p>
+              </div>
+            </div>
+
+
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Create User</button>
+            </div>
+
+
+          <% end %>
+     
+        </div><!--/span-->
+        
+      </div> <!--/div.row-->
+      
+    
+    </div><!--/span-->
+
+    
+    
+  </div><!--/row-fluid-->
+
+</div><!--/span-->

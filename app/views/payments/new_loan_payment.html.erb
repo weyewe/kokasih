@@ -1,0 +1,89 @@
+
+<div class="span9 content">
+  <%= render :partial => "layouts/guide/new_loan_payment", :locals => {
+    :client => @client,
+    :loan => @loan
+  } %>
+
+  
+
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <%= render :partial => "payments/breadcrumb", :locals => {:client => @client, :loan => @loan} %>
+      
+      <div class="row-fluid">
+        
+        <div class="span3">
+          <p>
+            Account No: <b><%= @client.username.upcase %></b>.
+          </p>
+          
+          <p>
+            Total loan value is <%= number_to_currency(@loan.amount ,:unit => "Rp "  ) %>
+          </p>
+          
+          <p>
+            Paid loan is <%= number_to_currency(@loan.total_paid ,:unit => "Rp "  ) %>
+          </p>
+          
+          
+        </div>
+        
+        <div class="span9">
+  
+          <% if not  flash[:error].nil? %>
+            <div class="alert alert-error">
+              <a class="close">×</a>
+              <%= flash[:error].html_safe %>
+            </div>
+          <% end %>
+
+          <% if not  flash[:notice].nil? %>
+            <div class="alert alert-success">
+              <a class="close">×</a>
+              <%= flash[:notice].html_safe %> 
+            </div>
+          <% end %>
+          
+          <%  if @loan.loan_clearance.is_cleared == false %>
+            <%= form_for Payment.new , :url => client_payments_url(@client) ,
+                  :html => {:class => "form-horizontal well"} do |f| %>
+              <%= hidden_field_tag 'loan_id',  "#{@loan.id}" %>
+              <div class="control-group">
+                <%= f.label :amount, "Amount" %>
+                <div class="controls">
+                  <%= f.text_field :amount, :class=>"input-xlarge"  %>
+                  <p class="help-block">Enter the loan amount. Do not put comma to separate amount.<br />
+                    E.g. : <span style="text-decoration: line-through;">33,000</span> <b>33000</b>
+                    
+                    </p>
+                </div>
+              </div>
+
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Create Loan</button>
+              </div>
+
+
+            <% end %>
+          <% else %>
+            <div class="alert alert-success">
+              <!-- <a class="close">×</a> -->
+              <%= "The loan is fully paid." %> 
+            </div>
+          <% end %>
+          
+        </div>
+        
+      </div>
+      
+    
+    </div><!--/span-->
+
+    
+    
+  </div><!--/row-->
+
+</div><!--/span-->

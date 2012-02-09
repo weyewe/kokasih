@@ -1,0 +1,2 @@
+module MasterData::SubdistrictsHelper
+end

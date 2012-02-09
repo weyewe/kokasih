@@ -1,0 +1,86 @@
+
+<div class="span9 content">
+  <%= render :partial => "layouts/guide/new_loan" %>
+
+  
+
+  
+  <div class="row-fluid">
+    <div class="span12">
+      <%= render :partial => "loans/breadcrumb" %>
+      
+      <div class="row-fluid">
+        
+        <div class="span3">
+          <p>
+            Account No: <b><%= @client.username.upcase %></b>.
+          </p>
+          <p>
+            Currently, there are <%= @client.loans.count %> loans. 
+          </p>
+          
+          <p>
+            Total loan value is 0
+          </p>
+          
+          <p>
+            Paid loan is 0
+          </p>
+          
+          
+        </div>
+        
+        <div class="span9">
+  
+          <% if not  flash[:error].nil? %>
+            <div class="alert alert-error">
+              <a class="close">×</a>
+              <strong>Ah snaaps :(.</strong> Can't create more loan for this account.
+            </div>
+          <% end %>
+
+          <% if not  flash[:notice].nil? %>
+            <div class="alert alert-success">
+              <a class="close">×</a>
+              <strong>Yes!! :).</strong> A new client with Account No <b><%= params[:username]%></b> is created. 
+            </div>
+          <% end %>
+          
+          
+          <%= form_for [@client, Loan.new] , :url => client_loans_url(@client) ,
+                :html => {:class => "form-horizontal well"} do |f| %>
+
+            <div class="control-group">
+              <%= f.label :amount, "Amount" %>
+              <div class="controls">
+                <%= f.text_field :amount, :class=>"input-xlarge"  %>
+                <p class="help-block">Enter the loan amount</p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :description, "Description" %>
+              <div class="controls">
+                <%= f.text_area :description, :class=>"input-xlarge" , :rows => 5 %>
+                <p class="help-block">What is this loan for?</p>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Create Loan</button>
+            </div>
+
+
+          <% end %>
+          
+        </div>
+        
+      </div>
+      
+    
+    </div><!--/span-->
+
+    
+    
+  </div><!--/row-->
+
+</div><!--/span-->

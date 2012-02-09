@@ -1,0 +1,30 @@
+<div class="span3 process-nav">
+  <div class="well sidebar-nav">
+
+    <% if current_user.has_role?(:admin) %>
+      <%= get_process_nav( :admin , params ).html_safe %> 
+    <% end %>
+
+    <% if current_user.has_role?(:loan_creator) %>
+      <%= get_process_nav( :loan_creator , params ).html_safe %> 
+    <% end %>
+
+    <% if current_user.has_role?(:debt_collector) %>
+      <%= get_process_nav( :debt_collector , params ).html_safe %> 
+    <% end %>
+
+    <% if current_user.has_role?(:cashier) %>
+      <%= get_process_nav( :cashier , params ).html_safe %> 
+    <% end %>
+    
+    <% if current_user.has_role?(:master_data) %>
+      <%= get_process_nav( :master_data , params ).html_safe %> 
+    <% end %>
+    
+    
+
+
+
+
+  </div><!--/.well -->
+</div><!--/span-->

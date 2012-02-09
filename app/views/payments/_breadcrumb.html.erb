@@ -1,0 +1,59 @@
+<ul class="breadcrumb">
+  <li class="<%= get_create_payment_nav_active_state(CREATE_PAYMENT_NAV[:search_client]  , params) %>">
+    <%= link_to "Search Client", search_client_for_payment_url %>
+    <span class="divider">/</span>
+  </li>
+  
+  <% if in_select_loan_tab?(params)  or in_create_payment_tab?(params) %>
+    <li class="<%= get_create_payment_nav_active_state(CREATE_PAYMENT_NAV[:select_loan]  , params) %>">
+      <%= link_to  "Select Loan", client_loans_url(client) %>
+      <span class="divider">/</span>
+    </li>
+  <% end %>
+  
+  <% if in_create_payment_tab?(params) %>
+    <li class="<%= get_create_payment_nav_active_state(CREATE_PAYMENT_NAV[:create_payment]  , params) %>">
+      <%= link_to  "Create Payment", new_loan_payment_url(client, loan)  %>
+    </li>
+  <% end %>
+</ul>
+
+<% breadcrumb_list = [
+    {
+      :title => "Search Client",
+      :destination_link => "search_client_for_payment_url", 
+      :destination_link_params => [],
+      :conditions => [
+        {
+          :controller => "payments",
+          :action => "search_client"
+        }
+      ]
+    },
+    {
+      :title => "Select Loan",
+      :destination_link => "client_loans_url", 
+      :destination_link_params => [client],
+      :conditions => [
+        {
+          :controller => "loans",
+          :action => "index"
+        }
+      ]
+    },
+    {
+      :title => "Create Payment",
+      :destination_link => "new_loan_payment_url", 
+      :destination_link_params => [client, loan],
+      :conditions => [
+        {
+          :controller => "payments",
+          :action => "new_loan_payment"
+        }
+      ]
+    }
+  ]  
+%>
+
+
+<%#= create_breadcrumb_nav(breadcrumb_list , params).html_safe  %>

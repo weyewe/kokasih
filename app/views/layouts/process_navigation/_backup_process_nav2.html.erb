@@ -1,0 +1,221 @@
+ <% if current_user.has_role?(:admin) %>
+    
+    <% process_list = {
+      :header_title => "Admin",
+      :processes => [
+       {
+         :title => "Create Employee",
+         :destination_link => new_employee_url,
+         :conditions => [
+           {
+             :controller => "users", 
+             :action => "new_employee"
+           }
+         ]
+
+       },
+       {
+         :title => "All Employees",
+         :destination_link => all_employees_url,
+         :conditions => [
+           {
+             :controller => "users", 
+             :action => "all_employees"
+             }, {
+               :controller => "users", 
+               :action => "edit_employee"
+             }
+           ]
+         }
+        ]
+      } 
+      %>
+   
+   
+  <% end %>
+  
+
+  <% if current_user.has_role?(:loan_creator) %>
+
+    <% process_list = {
+      :header_title => "Loan Creator",
+      :processes => [
+          {
+            :title => "Create Loan",
+            :destination_link => search_client_url,
+            :conditions => [
+              {
+                :controller => "loans", 
+                :action => "search_client"
+              },{
+                :controller => "loans",
+                :action => "new"
+              }
+            ]
+
+          },
+          {
+              :title => "Create Client",
+              :destination_link => new_client_url,
+              :conditions => [
+                {
+                  :controller => "clients", 
+                  :action => "new"
+                  }
+                ]
+          },  
+          {
+            :title => "All Loans",
+            :destination_link => all_loans_url,
+            :conditions => [
+              {
+                :controller => "loans", 
+                :action => "all_loans"
+                }
+            ]
+          },
+          {
+            :title => "All Clients",
+            :destination_link => all_clients_url,
+            :conditions => [
+              {
+                :controller => "clients", 
+                :action => "all_clients"
+                }
+             ]
+          }
+        ]
+      } 
+    %>
+
+
+  <% end %>
+  
+
+  
+  <% if current_user.has_role?(:debt_collector) %>
+
+    <% process_list = {
+      :header_title => "Debt Collector",
+      :processes => [
+          {
+            :title => "Create Payment",
+            :destination_link => search_client_for_payment_url,
+            :conditions => [
+              {
+                :controller => "payments", 
+                :action => "search_client"
+              },
+              {
+                :controller => "loans",
+                :action => "index"
+              },
+              {
+                :controller => "payments",
+                :action => "new_loan_payment"
+              }
+            ]
+
+          },
+          {
+              :title => "Approved Payments",
+              :destination_link => '#',
+              :conditions => [
+                {
+                  :controller => '#', 
+                  :action => '#'
+                  }
+                ]
+          },  
+          {
+            :title => "Pending Approval",
+            :destination_link => '#',
+            :conditions => [
+              {
+                :controller => "#", 
+                :action => '#'
+                }
+              ]
+          },
+          {
+            :title => "Not Approved",
+            :destination_link => '#',
+            :conditions => [
+              {
+                :controller => '#', 
+                :action => '#'
+                }
+              ]
+          }
+        ]
+      } 
+    %>
+
+
+  <% end %>
+  
+  
+  
+  
+  <% if current_user.has_role?(:cashier) %>
+
+      <% process_list = {
+        :header_title => "Cashier",
+        :processes => [
+            {
+              :title => "Approve Payment",
+              :destination_link => '#',
+              :conditions => [
+                {
+                  :controller => '#', 
+                  :action => '#'
+                }
+              ]
+
+            },
+            {
+                :title => "Pending Approval",
+                :destination_link => '#',
+                :conditions => [
+                  {
+                    :controller => '#', 
+                    :action => '#'
+                    }
+                  ]
+            },  
+            {
+              :title => "View Debt Collector",
+              :destination_link => '#',
+              :conditions => [
+                {
+                  :controller => "#", 
+                  :action => '#'
+                  }
+                ]
+            },
+            {
+              :title => "All Approved",
+              :destination_link => '#',
+              :conditions => [
+                {
+                  :controller => '#', 
+                  :action => '#'
+                  }
+                ]
+            },
+            {
+              :title => "All Unapproved",
+              :destination_link => '#',
+              :conditions => [
+                {
+                  :controller => '#', 
+                  :action => '#'
+                  }
+                ]
+            }
+          ]
+        } 
+      %>
+
+
+  <% end %>
