@@ -5,7 +5,9 @@ class Client < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :account_creator_id, :username
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :account_creator_id, 
+              :username ,  :document_code 
+  
   
   
   validates_presence_of :username
@@ -15,6 +17,7 @@ class Client < ActiveRecord::Base
   
   has_many :loans
   has_many :users, :through => :loans
+  has_one :client_profile
   
   protected
   def self.find_for_database_authentication(conditions)

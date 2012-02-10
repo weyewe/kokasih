@@ -1,8 +1,14 @@
 <div class="span3 process-nav">
   <div class="well sidebar-nav">
 
-    <% if current_user.has_role?(:admin) %>
-      <%= get_process_nav( :admin , params ).html_safe %> 
+
+    <% if current_user.has_role?(:super_user) %>
+      <%= get_process_nav( :super_user , params ).html_safe %> 
+    <% end %>
+    
+    
+    <% if current_user.has_role?(:manager) %>
+      <%= get_process_nav( :manager , params ).html_safe %> 
     <% end %>
 
     <% if current_user.has_role?(:loan_creator) %>

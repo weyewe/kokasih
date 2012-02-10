@@ -28,30 +28,90 @@
               <strong>Yes!! :).</strong> A new client with Account No <b><%= params[:username]%></b> is created. 
             </div>
           <% end %>
+          
+          
+
+          
 
           <%= form_for Client.new , :url => create_new_client_url ,
                 :html => {:class => "form-horizontal"} do |f| %>
 
             <div class="control-group">
-              <%= f.label :email, "Email" %>
+              <%= f.label :username, "ID NO" %>
               <div class="controls">
-                <%= f.email_field :email, :class=>"input-xlarge"  %>
-                <p class="help-block">Enter the client email</p>
+                <%= f.text_field :username, :class=>"input-xlarge"  %>
+                <p class="help-block">Masukkan Nomor KTP</p>
               </div>
             </div>
 
-            <div class="control-group">
-              <%= f.label :username, "Account No" %>
-              <div class="controls">
-                <%= f.text_field :username, :class=>"input-xlarge" %>
-                <p class="help-block">Enter the client's account number. It has to be unique.</p>
-              </div>
-            </div>
-
+            <fieldset>
+              <%= fields_for ClientProfile.new do |fp| %>
+              
+                <div class="control-group">
+                  <%= fp.label :name, "Nama" %>
+                  <div class="controls">
+                    <%= fp.text_field :name, :class=>"input-xlarge"  %>
+                    <p class="help-block">Sesuai KTP</p>
+                  </div>
+                </div>
+              
+              
+                <div class="control-group">
+                  <%= fp.label :province_id, "Propinsi" %>
+                  <div class="controls">
+                    <%= fp.text_field :province_id, :class=>"input-xlarge"  %>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <%= fp.label :regency_id, "Kabupaten" %>
+                  <div class="controls">
+                    <%= fp.text_field :regency_id, :class=>"input-xlarge"  %>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <%= fp.label :subdistrict_id, "Propinsi" %>
+                  <div class="controls">
+                    <%= fp.text_field :subdistrict_id, :class=>"input-xlarge"  %>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <%= fp.label :village_id , "Kelurahan" %>
+                  <div class="controls">
+                    <%= fp.text_field :village_id, :class=>"input-xlarge"  %>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <%= fp.label :commune_id , "RW" %>
+                  <div class="controls">
+                    <%= fp.text_field :commune_id, :class=>"input-xlarge"  %>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <%= fp.label :neighborhood , "RT" %>
+                  <div class="controls">
+                    <%= fp.text_field :neighborhood, :class=>"input-xlarge"  %>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <%= fp.label :address , "Alamat Lengkap" %>
+                  <div class="controls">
+                    <%= fp.text_area :address, :class=>"input-xlarge", :rows => 5  %>
+                  </div>
+                </div>
+                
+                
+              <% end %>
+            </fieldset>
 
 
             <div class="form-actions">
-              <button class="btn btn-primary" type="submit">Create User</button>
+              <button class="btn btn-primary" type="submit">Create Member</button>
             </div>
 
 

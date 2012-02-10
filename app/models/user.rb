@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :login, :username, :email, :password, 
+            :password_confirmation, :remember_me, :user_id , :office_id,
+            :user_code 
   attr_accessor :login
   
   # Models
@@ -16,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :clients, :through => :loans
   
   has_many :payments
+  belongs_to :office 
   
   
   
@@ -40,7 +43,11 @@ class User < ActiveRecord::Base
       :user_id => self.id
     }).collect{ |x| x.role_id }
     
+    non_standard_role_id_array = Role.where{name.in NON_STANDARD_ROLE}.collect{ |x| x.id }
+    
     role_to_be_destroyed  = current_role_id_array - new_role_id_array
+    role_to_be_destroyed  -= non_standard_role_id_array 
+    
     role_to_be_created    = new_role_id_array   - current_role_id_array
     
     role_to_be_destroyed.each do |x|
@@ -66,6 +73,12 @@ class User < ActiveRecord::Base
   def has_role?(role_sym)
     roles.any? { |r| r.name.underscore.to_sym == role_sym }
   end
+  
+  
+  def self.current_office_employee( office ) 
+    User.where(:office_id => office.id)
+  end
+  
   
   
     

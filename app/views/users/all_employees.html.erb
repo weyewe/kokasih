@@ -1,7 +1,11 @@
 
 <div class="span9 content">
-  <%= render :partial => "layouts/guide/all_employees" %>
+  <%#= render :partial => "layouts/guide/all_employees" %>
 
+  <%= create_guide("All Employees", 
+  "Office <b>#{current_user.office.name}</b>.<br />Lists all employees ever registered, with their associated role, including the link to edit. ").html_safe %>
+  
+  
   <%= render :partial => "users/breadcrumb" %>
 
   

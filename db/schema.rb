@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120209033816) do
+ActiveRecord::Schema.define(:version => 20120210053740) do
 
   create_table "approvals", :force => true do |t|
     t.string   "approvable_type",                  :null => false
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(:version => 20120209033816) do
   create_table "assignments", :force => true do |t|
     t.integer  "role_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "client_profiles", :force => true do |t|
+    t.integer  "client_id",      :null => false
+    t.string   "name"
+    t.integer  "province_id"
+    t.integer  "regency_id"
+    t.integer  "subdistrict_id"
+    t.integer  "village_id"
+    t.integer  "commune_id"
+    t.integer  "neighborhood"
+    t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120209033816) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_creator_id",                     :null => false
+    t.string   "document_code"
   end
 
   add_index "clients", ["email"], :name => "index_clients_on_email", :unique => true
@@ -69,6 +84,16 @@ ActiveRecord::Schema.define(:version => 20120209033816) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "total_paid",  :precision => 15, :scale => 2, :default => 0.0
+  end
+
+  create_table "offices", :force => true do |t|
+    t.string   "name",           :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "island_id"
+    t.integer  "province_id"
+    t.integer  "regency_id"
+    t.integer  "subdistrict_id"
   end
 
   create_table "payments", :force => true do |t|
@@ -121,6 +146,8 @@ ActiveRecord::Schema.define(:version => 20120209033816) do
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "office_id",                              :null => false
+    t.string   "employee_code"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

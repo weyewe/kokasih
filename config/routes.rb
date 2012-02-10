@@ -5,7 +5,6 @@ Debita46::Application.routes.draw do
   
   resources :users 
   resources :loans
-  resources :clients 
   
   
 
@@ -14,6 +13,17 @@ Debita46::Application.routes.draw do
     resources :payments
   end
   
+  
+  # SUPER USER - related
+   match 'offices/new_branch_manager'  => "users#new_branch_manager", :as => :new_branch_manager
+   match 'offices/create_new_branch_manager'  => "users#create_new_branch_manager", :as => :create_new_branch_manager, :method => :post
+   
+   
+  resources :offices do 
+    resources :users
+  end
+  
+ 
   
   
   match 'create_new_employee' => "users#create_employee", :as => :create_new_employee, :method => :post
@@ -90,7 +100,7 @@ Debita46::Application.routes.draw do
   #   end
 
   # Sample resource route within a namespace:
-  #   namespace :admin do
+  #   namespace :manager do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products

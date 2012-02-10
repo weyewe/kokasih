@@ -1,0 +1,71 @@
+
+
+<div class="span9 content">
+  
+  <%= create_guide("Create Branch Manager",  
+          "Select the office, and enter the new employee's particulars").html_safe %>
+
+  
+
+
+
+  
+  <div class="row-fluid">
+    <div class="span12">
+      
+      <%= form_for User.new , :url => create_new_branch_manager_url ,
+                  :html => {:class => "form-horizontal"} do |f| %>
+                  
+                  <!--  we need the select input, to pick the office -->
+        
+        
+        
+        <div class="control-group">
+          <label for="office_selection" class="control-label">Select list</label>
+          <div class="controls">
+            <%= select_tag "office_selection",
+              options_from_collection_for_select(Office.all, "id", "name") %>
+            <!-- <select id="office_selection">
+                        <option>something</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select> -->
+          </div>
+        </div>
+                  
+                  
+                  
+        <div class="control-group">
+          <%= f.label :email, "Email" %>
+          <div class="controls">
+            <%= f.email_field :email, :class=>"input-xlarge"  %>
+            <p class="help-block">Enter the employee email</p>
+          </div>
+        </div>
+
+        <!-- <div class="control-group">
+             <%= f.label :username, "Employee ID" %>
+             <div class="controls">
+               <%= f.text_field :username, :class=>"input-xlarge" %>
+               <p class="help-block">Enter the employee ID</p>
+             </div>
+           </div> -->
+
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Create Branch Manager</button>
+      </div>
+
+
+      <% end %>
+    
+    
+    </div><!--/span-->
+
+    
+    
+  </div><!--/row-->
+
+</div><!--/span-->

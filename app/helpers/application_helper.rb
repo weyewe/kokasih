@@ -3,8 +3,38 @@ module ApplicationHelper
   
   ACTIVE = 'active'
   
-  ADMIN_PROCESS_LIST = {
-    :header_title => "Admin",
+  
+  SUPER_USER_PROCESS_LIST = {
+    :header_title => "SUPER USER",
+    :processes => [
+     {
+       :title => "Create Office",
+       :destination_link => "new_office_url",
+       :conditions => [
+         {
+           :controller => "offices", 
+           :action => "new"
+         }
+       ]
+
+     },
+     {
+       :title => "Create Branch Manager",
+       :destination_link => "new_branch_manager_url",
+       :conditions => [
+         {
+           :controller => "users", 
+           :action => "new_branch_manager"
+          }
+         ]
+       }
+      ]
+    }
+    
+    
+  
+  MANAGER_PROCESS_LIST = {
+    :header_title => "Manager",
     :processes => [
      {
        :title => "Create Employee",
@@ -261,8 +291,12 @@ module ApplicationHelper
   def get_process_nav( symbol, params)
     # create_process_nav(ADMIN_PROCESS_LIST, params )
     
-    if symbol == :admin
-      return create_process_nav(ADMIN_PROCESS_LIST, params )
+    if symbol == :super_user
+      return create_process_nav(SUPER_USER_PROCESS_LIST, params )
+    end
+    
+    if symbol == :manager
+      return create_process_nav(MANAGER_PROCESS_LIST, params )
     end
     
     if symbol == :loan_creator
@@ -352,6 +386,26 @@ module ApplicationHelper
     
     result << "</ul>"
   end
+  
+  
+  
+  #######################################################
+  #####
+  #####     AppWide functions, create_guide 
+  #####
+  #######################################################
+  
+  def create_guide(title, description)
+    result = ""
+    result << "<div class='explanation-unit'>"
+    result << "<h1>#{title}</h1>"
+    result << "<p>#{description}</p>"
+    result << "</div>"
+  end
+  
+
+  
+  
   
   
   

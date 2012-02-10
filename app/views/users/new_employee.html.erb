@@ -18,14 +18,14 @@
           </div>
         </div>
         
-        <div class="control-group">
-          <%= f.label :username, "Employee ID" %>
-          <div class="controls">
-            <%= f.text_field :username, :class=>"input-xlarge" %>
-            <p class="help-block">Enter the employee ID</p>
-          </div>
-        </div>
-        
+        <!--         <div class="control-group">
+                  <%= f.label :username, "Employee ID" %>
+                  <div class="controls">
+                    <%= f.text_field :username, :class=>"input-xlarge" %>
+                    <p class="help-block">Enter the employee ID</p>
+                  </div>
+                </div>
+                 -->
         <!-- <div class="control-group">
                    <%= f.label :password, "Password" %>
                    <div class="controls">
@@ -46,10 +46,7 @@
           <label for="optionsCheckboxList" class="control-label">Role</label>
           <div class="controls">
             
-            <% Role.all.each do |r| %>
-              <% if r.name == SUPERUSER %>
-                <% next %>
-              <% end %>
+            <% Role.get_roles_not_in(NON_STANDARD_ROLE ).each do |r| %>
               <label class="checkbox">
                 <%= check_box_tag 'role',r.id,checked=false, 
                     {:name => "role[role_id][]", :id => "role_id_#{r.id}"}%>

@@ -56,7 +56,7 @@ CREATE_PAYMENT_NAV = {
 ###############################################
 
 ROLE_SYMBOL = {
-  :admin => 1,
+  :manager => 1,
   :loan_creator => 2, 
   :debt_collector => 3, 
   :cashier => 4 
@@ -71,6 +71,21 @@ http://id.answers.yahoo.com/question/index?qid=20080921134433AALulzR
   Village = kelurahan
   Commune = RW
 =end
+
+
+
+ISLANDS = {
+    1 => "Jawa", 
+    2 => "Sumatera",
+    3 => "Nusa Tenggara",
+    4 => "Kalimantan",
+    5 => "Sulawesi",
+    6 => "Maluku dan Papua"
+}
+
+NON_STANDARD_ROLE = ["Manager" , "MasterData", "SuperUser" ]
+
+MANAGER_ROLE = ["Manager"]
 
 
 

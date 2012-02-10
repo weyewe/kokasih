@@ -1,6 +1,11 @@
 
 <div class="span9 content">
-  <%= render :partial => "layouts/guide/edit_employee" %>
+  <%#= render :partial => "layouts/guide/edit_employee" %>
+  
+  
+  <%= create_guide("Edit EmployeeID: #{@employee.username}", 
+  "Office #{current_user.office.name}.<br />
+  Edit the selected employee's role ").html_safe %>
   <%= render :partial => "users/breadcrumb" %>
 
   
@@ -18,19 +23,19 @@
           </div>
         </div>
         
-        <div class="control-group">
-          <%= f.label :username, "Employee ID" %>
-          <div class="controls">
-            <span class="input-xlarge uneditable-input"><%= @employee.username.upcase %></span>
-          </div>
-        </div>
+       <!--         <div class="control-group">
+                 <%= f.label :username, "Employee ID" %>
+                 <div class="controls">
+                   <span class="input-xlarge uneditable-input"><%= @employee.username.upcase %></span>
+                 </div>
+               </div> -->
 
         
         <div class="control-group">
           <label for="optionsCheckboxList" class="control-label">Role</label>
           <div class="controls">
             
-            <% Role.all.each do |role| %>
+            <% Role.get_roles_not_in( NON_STANDARD_ROLE ).each do |role| %>
               <% if role.name == SUPERUSER %>
                 <% next %>
               <% end %>
