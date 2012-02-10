@@ -17,8 +17,14 @@ class ClientsController < ApplicationController
     
     if @new_client.save 
       flash[:notice] = "Yeah, saved successfully"
+      
     else
       flash[:error] = "New Client can't be saved. the account no & email is not unique"
+      puts "OOOOOOOOOOOOOOOOO This is the error OOOOOOOOOO\n"*10
+      puts @new_client.errors
+      puts @new_client.errors.class
+      puts @new_client.errors.each
+      
     end
     
     redirect_to new_client_url( :username => params[:client][:username])

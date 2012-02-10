@@ -325,7 +325,7 @@ module ApplicationHelper
                 process_list[:header_title] + 
                 "</li>"
     
-    puts "Done with printing the header title\n"*10            
+    # puts "Done with printing the header title\n"*10            
     
     process_list[:processes].each do |process|
       result << create_process_entry( process, params )
@@ -334,14 +334,14 @@ module ApplicationHelper
     result << "</ul>"
     
     
-    puts "The result is #{result}\n\n"*10
+    # puts "The result is #{result}\n\n"*10
     return result
   end
   
   
   def create_process_entry( process, params )
     is_active = is_process_active?( process[:conditions], params)
-    puts "The is active value is #{is_active}\n"*10
+    # puts "The is active value is #{is_active}\n"*10
     
     process_entry = ""
     process_entry << "<li class='#{is_active}'>" + 

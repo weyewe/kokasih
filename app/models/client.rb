@@ -10,14 +10,27 @@ class Client < ActiveRecord::Base
   
   
   
+  
+  
   validates_presence_of :username
   validates_uniqueness_of :username
+  
+  validates_uniqueness_of :email, :allow_blank => true
+  
   
   
   
   has_many :loans
   has_many :users, :through => :loans
   has_one :client_profile
+  
+  
+  # so that the email can be blank in registering new client
+  def email_required?
+    false
+  end
+
+
   
   protected
   def self.find_for_database_authentication(conditions)

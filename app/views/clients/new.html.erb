@@ -1,17 +1,15 @@
 
 <div class="span9 content">
-  <%= render :partial => "layouts/guide/new_client" %>
+  <%#= render :partial => "layouts/guide/new_client" %>
+  <%= create_guide("New Member", 
+        "Save the approved member particulars so that he can start borrowing." ).html_safe %>
 
   
 
   
   <div class="row-fluid">
     <div class="span12">
-      
       <div class="row-fluid">
-        
-    
-        
         <div class="span12">
           
           <% if not  flash[:error].nil? %>
@@ -59,28 +57,60 @@
                 <div class="control-group">
                   <%= fp.label :province_id, "Propinsi" %>
                   <div class="controls">
-                    <%= fp.text_field :province_id, :class=>"input-xlarge"  %>
+                    
+                    
+                    <%= select_tag 'client_profile[province_id]',
+                    options_for_select(Province.all.collect { |c| [c.name, c.id] }.
+                      push(['Others', '']) ), 
+                       :class=>"select-other"  %>
+                    
+                    <%= text_field_tag :new_province_id, nil, :class=>"input-xlarge other-replacement", 
+                            :placeholder => "Other value?"  %>
+                    <p class="help-block">Jika tidak ada pilihan, pilih Others. Akan muncul field yang dapat diisi.</p>
                   </div>
                 </div>
                 
                 <div class="control-group">
                   <%= fp.label :regency_id, "Kabupaten" %>
                   <div class="controls">
-                    <%= fp.text_field :regency_id, :class=>"input-xlarge"  %>
+                    <%= select_tag 'client_profile[regency_id]',
+                    options_for_select(Regency.all.collect { |c| [c.name, c.id] }.
+                      push(['Others', ''])  )  , 
+                       :class=>"select-other"%>
+                      
+                    <%#= fp.text_field :regency_id, :class=>"input-xlarge"  %>
+                    <%= text_field_tag :new_regency_id, nil, :class=>"input-xlarge other-replacement", 
+                            :placeholder => "Other value?"  %>
+                    
+                    <p class="help-block">Jika tidak ada pilihan, pilih Others. Akan muncul field yang dapat diisi.</p>
                   </div>
                 </div>
                 
                 <div class="control-group">
-                  <%= fp.label :subdistrict_id, "Propinsi" %>
+                  <%= fp.label :subdistrict_id, "Kecamatan" %>
                   <div class="controls">
-                    <%= fp.text_field :subdistrict_id, :class=>"input-xlarge"  %>
+                    <%= select_tag 'client_profile[subdistrict_id]',
+                    options_for_select(Subdistrict.all.collect { |c| [c.name, c.id] }.
+                      push(['Others', ''])  ) , 
+                       :class=>"select-other" %>
+                    <%#= fp.text_field :subdistrict_id, :class=>"input-xlarge"  %>
+                    <%= text_field_tag :new_subdistrict_id, nil, :class=>"input-xlarge other-replacement", 
+                            :placeholder => "Other value?"  %>
+                    <p class="help-block">Jika tidak ada pilihan, pilih Others. Akan muncul field yang dapat diisi.</p>
                   </div>
                 </div>
                 
                 <div class="control-group">
                   <%= fp.label :village_id , "Kelurahan" %>
                   <div class="controls">
-                    <%= fp.text_field :village_id, :class=>"input-xlarge"  %>
+                    <%= select_tag 'client_profile[village_id]',
+                    options_for_select(Village.all.collect { |c| [c.name, c.id] }.
+                      push(['Others', ''])  ), 
+                       :class=>"select-other"  %>
+                    <%#= fp.text_field :village_id, :class=>"input-xlarge"  %>
+                    <%= text_field_tag :new_village_id, nil, :class=>"input-xlarge other-replacement", 
+                            :placeholder => "Other value?"  %>
+                    <p class="help-block">Jika tidak ada pilihan, pilih Others. Akan muncul field yang dapat diisi.</p>
                   </div>
                 </div>
                 
@@ -101,7 +131,7 @@
                 <div class="control-group">
                   <%= fp.label :address , "Alamat Lengkap" %>
                   <div class="controls">
-                    <%= fp.text_area :address, :class=>"input-xlarge", :rows => 5  %>
+                    <%= fp.text_area :address, :class=>"input-xlarge", :rows => 5 %>
                   </div>
                 </div>
                 
@@ -118,14 +148,7 @@
           <% end %>
      
         </div><!--/span-->
-        
       </div> <!--/div.row-->
-      
-    
     </div><!--/span-->
-
-    
-    
   </div><!--/row-fluid-->
-
 </div><!--/span-->
